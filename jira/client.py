@@ -1811,6 +1811,17 @@ class JIRA(object):
             Version(self._options, self._session, raw_ver_json) for raw_ver_json in r_json]
         return versions
 
+    @translate_resource_args
+    def project_statuses(self, project):
+        """Get a list of Statuses associated with a project.
+
+        :param project: ID or key of the project to get statuses from
+        """
+        r_json = self._get_json('project/' + project + '/statuses')
+        statuses = [Status(self._options, self._session, raw_status_json) for
+                raw_status_json in r_json]
+        return statuses
+
     # non-resource
     @translate_resource_args
     def project_roles(self, project):
