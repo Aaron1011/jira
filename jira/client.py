@@ -1813,14 +1813,14 @@ class JIRA(object):
 
     @translate_resource_args
     def project_statuses(self, project):
-        """Get a list of Statuses associated with a project.
+        """Get a list of IssueTypes (with statuses) associated with a project.
 
         :param project: ID or key of the project to get statuses from
         """
         r_json = self._get_json('project/' + project + '/statuses')
-        statuses = [Status(self._options, self._session, raw_status_json) for
+        issue_types = [IssueType(self._options, self._session, raw_status_json) for
                 raw_status_json in r_json]
-        return statuses
+        return issue_types
 
     # non-resource
     @translate_resource_args
